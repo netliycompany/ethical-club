@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> your profile</title>
+</head>
+<body>
+    <main class="page">
+        <aside class="sidebar" aria-label="Profile navigation">
+            <a class="slack-link" href="https://join.slack.com/t/netily-club/shared_invite/zt-4eagevv0j-ELD4aovTN~hcXnPf8REFKg" target="_blank" rel="noopener noreferrer">Join our Slack <span aria-hidden="true">↗</span></a>
+            <p class="eyebrow">YOUR ACCOUNT</p>
+            <div class="profile-identity">
+                <div class="profile-avatar" aria-hidden="true">🌱</div>
+            </div>
+            <button id="edit-profile" class="edit-button" type="button">Edit profile</button>
+        </aside>
+
+        <section class="content">
+            <header class="page-header">
+                <p class="eyebrow">PROFILE SETTINGS</p>
+                <h1 id="page-title">Your profile</h1>
+                <p class="intro">Keep your details up to date.</p>
+            </header>
+
+            <section id="profile-view" class="profile-view" aria-label="Saved profile" hidden>
+                <p id="save-status" class="save-status" role="status" aria-live="polite">Your profile is saved in this browser.</p>
+            </section>
+
+            <form id="profile-form" class="profile-form" hidden>
+                <div class="field-row">
+                    <label for="display-name">Display name</label>
+                    <input id="display-name" name="displayName" type="text" autocomplete="name" maxlength="80" placeholder="Your name">
+                </div>
+                <div class="field-row">
+                    <label for="username">Username</label>
+                    <input id="username" name="username" type="text" autocomplete="username" maxlength="40" placeholder="your-username">
+                </div>
+                <div class="field-row">
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="email" autocomplete="email" maxlength="254" placeholder="you@example.com">
+                </div>
+                <div class="field-row">
+                    <label for="bio">About you <span class="optional">Optional</span></label>
+                    <textarea id="bio" name="bio" rows="4" maxlength="280" placeholder="A little about yourself"></textarea>
+                    <small class="field-hint">Up to 280 characters</small>
+                </div>
+                <div class="form-footer">
+                    <p id="form-status" class="save-status" role="status" aria-live="polite">Your changes are saved in this browser.</p>
+                    <div class="form-actions">
+                        <button id="cancel-edit" class="cancel-button" type="button">Cancel</button>
+                        <button type="submit">Save profile</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <style>
+        :root {
+            color-scheme: light;
+            font-family: "Trebuchet MS", sans-serif;
+            color: #202b2a;
+            background: #f3f5ef;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: radial-gradient(ellipse at 12% 8%, #e1eee5 0, transparent 38%), #f3f5ef;
+        }
+
+        .page {
+            display: grid;
+            grid-template-columns: 220px minmax(0, 680px);
+            gap: 56px;
+            width: min(100% - 48px, 1040px);
+            margin: 0 auto;
+            padding: 48px 0 64px;
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 32px;
+            align-self: start;
+            min-height: 280px;
+            padding: 52px 18px 20px;
+            border-right: 1px solid #d5ddd5;
+        }
+
+        .page-header {
+            padding: 8px 0 30px;
+            border-bottom: 1px solid #d5ddd5;
+        }
+
+        .slack-link {
+            position: absolute;
+            top: 0;
+            left: 18px;
+            color: #276451;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 4px;
+        }
+
+        .slack-link span {
+            margin-left: 4px;
+        }
+
+        .profile-identity {
+            margin: 24px 0 20px;
+        }
+
+        .profile-avatar {
+            display: grid;
+            width: 52px;
+            aspect-ratio: 1;
+            place-items: center;
+            border-radius: 50%;
+            background: #d7e8dc;
+            color: #276451;
+            font-family: Georgia, serif;
+            font-size: 1.5rem;
+        }
+
+        .edit-button {
+            width: 100%;
+        }
+
+        .content {
+            min-width: 0;
+        }
+
+        .eyebrow {
+            margin: 0 0 10px;
+            color: #547a68;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+        }
+
+        h1 {
+            margin: 0;
+            font-family: Georgia, serif;
+            font-size: clamp(2rem, 8vw, 3rem);
+            font-weight: 400;
+        }
+
+        .intro {
+            margin: 12px 0 0;
+            color: #66736b;
+        }
+
+        .profile-form {
+            padding-top: 12px;
+        }
+
+        .profile-view {
+            padding-top: 12px;
+        }
+
+        .field-row {
+            display: grid;
+            gap: 9px;
+            padding: 20px 0;
+            border-bottom: 1px solid #dfe4dc;
+        }
+
+        label {
+            font-size: 0.94rem;
+            font-weight: 700;
+        }
+
+        .optional,
+        .field-hint {
+            color: #758078;
+            font-size: 0.82rem;
+            font-weight: 400;
+        }
+
+        .optional {
+            margin-left: 6px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            border: 1px solid #cbd4cb;
+            border-radius: 4px;
+            padding: 12px 13px;
+            background: #fff;
+            color: #202b2a;
+            font: inherit;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #34745d;
+            outline: 3px solid #34745d30;
+        }
+
+        .field-hint {
+            margin-top: -3px;
+        }
+
+        .form-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            padding-top: 24px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .save-status {
+            margin: 0;
+            color: #66736b;
+            font-size: 0.88rem;
+        }
+
+        button {
+            flex: 0 0 auto;
+            border: 0;
+            border-radius: 4px;
+            padding: 12px 18px;
+            background: #276451;
+            color: #fff;
+            font: inherit;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4f3f;
+        }
+
+        .cancel-button {
+            border: 1px solid #cbd4cb;
+            background: transparent;
+            color: #202b2a;
+        }
+
+        .cancel-button:hover {
+            background: #e7ece5;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
+        @media (max-width: 480px) {
+            .page {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 24px;
+                width: min(100% - 32px, 680px);
+                padding-top: 24px;
+            }
+
+            .sidebar {
+                position: static;
+                min-height: 0;
+                padding: 48px 0 18px;
+                border-right: 0;
+                border-bottom: 1px solid #d5ddd5;
+            }
+
+            .profile-identity {
+                display: grid;
+                grid-template-columns: 52px minmax(0, 1fr);
+                column-gap: 14px;
+                align-items: center;
+                margin: 12px 0;
+            }
+
+            .profile-avatar {
+                grid-row: span 2;
+            }
+
+            .edit-button {
+                width: auto;
+            }
+
+            .form-footer {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .form-actions {
+                width: 100%;
+            }
+
+            .form-actions button {
+                flex: 1;
+            }
+        }
+    </style>
+    <script>
+        const profileStorageKey = "netily-club-profile";
+        const profileForm = document.querySelector("#profile-form");
+        const profileView = document.querySelector("#profile-view");
+        const formStatus = document.querySelector("#form-status");
+        const saveStatus = document.querySelector("#save-status");
+        const editProfileButton = document.querySelector("#edit-profile");
+        const cancelEditButton = document.querySelector("#cancel-edit");
+        const pageTitle = document.querySelector("#page-title");
+        const profileFields = ["displayName", "username", "email", "bio"];
+
+        function showProfile(profile) {
+            profileForm.hidden = true;
+            profileView.hidden = false;
+            pageTitle.textContent = "Your profile";
+            editProfileButton.textContent = "Edit profile";
+        }
+
+        function editProfile() {
+            profileView.hidden = true;
+            profileForm.hidden = false;
+            pageTitle.textContent = "Edit your profile";
+            editProfileButton.textContent = "Viewing editor";
+        }
+
+        try {
+            const savedProfile = JSON.parse(localStorage.getItem(profileStorageKey) || "{}");
+            for (const fieldName of profileFields) {
+                if (typeof savedProfile[fieldName] === "string") {
+                    profileForm.elements[fieldName].value = savedProfile[fieldName];
+                }
+            }
+            if (profileFields.some((fieldName) => savedProfile[fieldName])) {
+                showProfile(savedProfile);
+            } else {
+                editProfile();
+            }
+        } catch {
+            formStatus.textContent = "Saved profile could not be loaded. You can enter and save your details again.";
+            editProfile();
+        }
+
+        editProfileButton.addEventListener("click", editProfile);
+        cancelEditButton.addEventListener("click", () => {
+            const profile = Object.fromEntries(profileFields.map((fieldName) => [fieldName, profileForm.elements[fieldName].value.trim()]));
+            if (profileFields.some((fieldName) => profile[fieldName])) {
+                showProfile(profile);
+            }
+        });
+
+        profileForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const profile = Object.fromEntries(
+                profileFields.map((fieldName) => [fieldName, profileForm.elements[fieldName].value.trim()])
+            );
+
+            try {
+                localStorage.setItem(profileStorageKey, JSON.stringify(profile));
+                saveStatus.textContent = "Profile saved in this browser.";
+                showProfile(profile);
+            } catch {
+                formStatus.textContent = "Could not save your profile. Check your browser storage settings.";
+            }
+        });
+    </script>
+    <hr>
+    <hr>
+    <h1>✨ Add project</h1>
+    <style>
+    h1{
+        color: #547a68;
+        shape-image-threshold: calc(10px);
+        text-shadow: #66736b;
+        font-kerning: none;
+        glyph-orientation-horizontal: 10px;
+        
+    }
+    </style>
+    <hr>
+    <hr>
+   <botton><a href="jhfkug.html"> import project</a></botton>
+    <style>
+        /* Target all <p> tags directly */
+a {
+  color: #2b7a78;
+  font-size: 18px;
+  line-weight: bold;
+
+}
+
+    </style>
+</body>
+</html>

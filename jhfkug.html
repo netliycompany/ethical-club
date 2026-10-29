@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Form</title>
+    <style>
+        /* Style the form container to look clean and centered */
+        form {
+            display: flex;
+            flex-direction: column;
+            max-width: 400px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            font-family: Arial, sans-serif;
+        }
+
+        /* Style the text labels above inputs */
+        label {
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Style the input boxes and the dropdown selection */
+        input, select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        /* Style the submit button */
+        button {
+            margin-top: 20px;
+            padding: 12px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- All inputs are now inside the form tag so they submit properly -->
+    <form id="project-form">
+        
+        <label for="name">Name</label>
+        <input type="text" id="name" name="user_name" placeholder="John Doe" required>
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="user_phone" placeholder="123-456-7890">
+
+        <label for="url">URL</label>
+        <input type="url" id="url" name="user_url" placeholder="https://example.com">
+
+        <label for="project-type">Which type of project?</label>
+        <!-- Using a select dropdown instead of a text input makes it easier for users -->
+        <select id="project-type" name="project_type">
+            <option value="web-design">Web Design</option>
+            <option value="seo">SEO / Marketing</option>
+            <option value="e-commerce">E-Commerce Store</option>
+            <option value="other">Other</option>
+        </select>
+
+        <button type="submit">Submit Project</button>
+    </form>
+    <p id="submit-status" role="status" aria-live="polite" hidden></p>
+    <p id="email-link-container" hidden>
+        <a id="email-link" href="mailto:bhandarimarshal97@gmail.com">Open your email app</a>
+    </p>
+
+    <script>
+        const projectForm = document.querySelector("#project-form");
+        const submitStatus = document.querySelector("#submit-status");
+        const emailLink = document.querySelector("#email-link");
+        const emailLinkContainer = document.querySelector("#email-link-container");
+        const recipient = "bhandarimarshal97@gmail.com";
+
+        projectForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const formValues = new FormData(projectForm);
+            const message = [
+                `Name: ${formValues.get("user_name")}`,
+                `Phone Number: ${formValues.get("user_phone") || "Not provided"}`,
+                `URL: ${formValues.get("user_url") || "Not provided"}`,
+                `Project Type: ${formValues.get("project_type")}`
+            ].join("\n");
+            const emailSubject = encodeURIComponent("New project submission");
+            const emailBody = encodeURIComponent(message);
+
+            emailLink.href = `mailto:${recipient}?subject=${emailSubject}&body=${emailBody}`;
+            submitStatus.textContent = `Your project details are ready. Go to your mail app and send the email to ${recipient}.`;
+            submitStatus.hidden = false;
+            emailLinkContainer.hidden = false;
+        });
+    </script>
+
+</body>
+</html>

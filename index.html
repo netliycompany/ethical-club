@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Netily club</title>
+    <style>
+      :root {
+        --bg: #0f172a;
+        --panel: #111827;
+        --primary: #38bdf8;
+        --primary-dark: #0ea5e9;
+        --text: #e2e8f0;
+        --muted: #64748b; /* Updated slightly darker for text contrast on yellow */
+        --white: #ffffff;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #ffffff; /* Page background stays white */
+        color: var(--text);
+      }
+
+      .hero-bg {
+        height: 50vh;
+        min-height: 360px;
+        background-image: linear-gradient(rgba(204, 206, 211, 0.5), rgba(15, 23, 42, 0.8)),
+          url('https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1600&q=80');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      .image-strip {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        padding: 18px 24px 0;
+        background: #ffffff;
+      }
+
+      .image-strip img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 12px;
+        display: block;
+        box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+      }
+
+      .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: rgba(15, 23, 42, 0.9);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 72px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1.4rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: var(--white);
+        text-decoration: none;
+      }
+
+      .brand-mark {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        display: grid;
+        place-items: center;
+        font-size: 1rem;
+        font-weight: 800;
+        color: var(--white);
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+      }
+
+      .nav-links a {
+        color: #94a3b8;
+        text-decoration: none;
+        font-size: 0.96rem;
+        transition: color 0.2s ease;
+      }
+
+      .nav-links a:hover,
+      .nav-links a:focus {
+        color: var(--white);
+      }
+
+      /* ─── CONTAINER & CONTENT STYLES (NOW YELLOW WITH HIGHER CONTRAST TEXT) ─── */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 24px;
+      }
+
+      .content-box {
+        background-color: #fef08a; /* Changed content box background to yellow */
+        border: 1px solid #fef08a;
+        padding: 30px;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+      }
+
+      .content-box h1 {
+        color: #1e293b; /* Changed from white to dark gray so it is readable on yellow */
+        font-size: 2rem;
+        margin-bottom: 12px;
+      }
+
+      .content-box p {
+        color: #334155; /* Changed from light gray to dark gray for clear readability */
+        font-size: 1.1rem;
+        line-height: 1.6;
+        text-transform: capitalize; 
+      }
+
+      .footer-credit {
+        background: #0f172a;
+        color: #e2e8f0;
+        text-align: center;
+        padding: 18px 20px 28px;
+        font-size: 0.98rem;
+        line-height: 1.6;
+      }
+
+      .footer-credit strong {
+        color: #facc15;
+      }
+
+      @media (max-width: 700px) {
+        .nav-container {
+          flex-wrap: wrap;
+          justify-content: center;
+          padding-top: 14px;
+          padding-bottom: 14px;
+          gap: 12px;
+        }
+
+        .nav-links {
+          width: 100%;
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: 14px 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar" aria-label="Main navigation">
+      <div class="nav-container">
+        <a href="#" class="brand" aria-label="Home">
+          <span class="brand-mark">N</span>
+          <span>Netily club</span>
+        </a>
+
+        <div class="nav-links">
+          <a href="bb.html">join</a>
+          <a href="about.html">About</a>
+          <a href="service.html">Services</a>
+          <a href="">Contact</a>
+
+        </div>
+      </div>
+    </nav>
+
+    <!-- Coding background image preserved -->
+    <div class="hero-bg" aria-label="Coding background image"></div>
+
+    <div class="image-strip" aria-label="Coding images gallery">
+      <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80" alt="Coding workspace" />
+      <img src="https://images.unsplash.com/photo-1526379095098-d400fd0bf935?auto=format&fit=crop&w=800&q=80" alt="Laptop programming" />
+      <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80" alt="Software development" />
+      <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80" alt="Coding on monitor" />
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="container">
+        <div class="content-box">
+            <h1>Events 10+</h1>
+            <p>Robotic events, programming events, and website development events.</p>
+        </div>
+    </div>
+     <div class="container">
+        <div class="content-box">
+            <h1>what does it do?</h1>
+            <p>Netily Club is a student-focused technology and innovation community that helps members explore programming, automation, and digital creator skills through hands-on, collaborative projects.</p>
+        </div>
+    </div>
+
+    <div class="footer-credit">
+      <strong>Co-founder:</strong> Marshal Bhandari<br />
+      <strong>School:</strong> Nepal Nayamill School, Shanti Namuna
+    </div>
+
+  <script>
+    alert("Welcome to this club!");
+</script>
+
+<style>
+  script{
+    color: #facc15;
+  }
+</style>
+  </body>
+</html>
